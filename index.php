@@ -23,7 +23,6 @@ require 'lib/Mullet.php';
 
 
 
-
 function index() {
   require 'lib/Mustache.php';
   $m = new Mustache;
@@ -40,5 +39,5 @@ if (!in_array(strtolower($_SERVER['REQUEST_METHOD']),array('put','delete')))
   Moor::route('/@class/@method', '@class(uc)::@method(lc)');
 Moor::route('/@class/:id([0-9A-Za-z_-]+)', '@class(uc)::'.strtolower($_SERVER['REQUEST_METHOD']));
 Moor::route('/@class', '@class(uc)::'.strtolower($_SERVER['REQUEST_METHOD']));
-Moor::route( '/', 'index' );
+Moor::route( '*', 'index' );
 Moor::run();
