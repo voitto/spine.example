@@ -17,7 +17,7 @@ require 'lib/Mullet.php';
 
 
 
-// Add your models and controllers
+// models and controllers go here
 
 
 
@@ -34,6 +34,39 @@ function index() {
 }
 
 
+if (isset($_GET['class'])) {
+  $class = ucwords($_GET['class']);
+  $method = strtolower($_SERVER['REQUEST_METHOD']);
+  if (isset($_GET['method']))
+    $method = $_GET['method'];
+  if (method_exists($class,$method))
+    $class::$method();
+} else {
+  index();
+}
+
+
+/*
+
+//
+// Instructions for using pretty URLs with Spine.js or Backbone.js
+//
+
+
+// .htaccess example:
+
+// RewriteEngine on
+// RewriteCond %{REQUEST_FILENAME} !-d
+// RewriteCond %{REQUEST_FILENAME} !-f
+// RewriteRule ^.*$ index.php [QSA,NS]
+
+
+// include Moor, a routing library like this:
+
+// require 'lib/Moor.php';
+
+
+// and finally, set up Moor routes:
 
 if (!in_array(strtolower($_SERVER['REQUEST_METHOD']),array('put','delete')))
   Moor::route('/@class/@method', '@class(uc)::@method(lc)');
@@ -41,3 +74,5 @@ Moor::route('/@class/:id([0-9A-Za-z_-]+)', '@class(uc)::'.strtolower($_SERVER['R
 Moor::route('/@class', '@class(uc)::'.strtolower($_SERVER['REQUEST_METHOD']));
 Moor::route( '*', 'index' );
 Moor::run();
+
+*/
