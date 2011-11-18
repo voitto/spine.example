@@ -12,14 +12,17 @@ $config = array(
 
 
 
-require 'lib/Moor.php';
 require 'lib/Structal.php';
 require 'lib/Mullet.php';
 
 
 
 
-// Add your models and controllers
+
+// Add your models and controllers here
+
+
+
 
 
 
@@ -40,8 +43,10 @@ if (isset($_GET['class'])) {
   $method = strtolower($_SERVER['REQUEST_METHOD']);
   if (isset($_GET['method']))
     $method = $_GET['method'];
-  if (method_exists($class,$method))
-    $class::$method();
+  if (method_exists($class,$method)){
+    $$class = new $class();
+    $$class->$method();
+  }
 } else {
   index();
 }
@@ -51,6 +56,9 @@ if (isset($_GET['class'])) {
 /*
 
 (optional) Routes (requires Moor.php)
+
+require 'lib/Moor.php';
+
 
 if (!in_array(strtolower($_SERVER['REQUEST_METHOD']),array('put','delete')))
   Moor::route('/@class/@method', '@class(uc)::@method(lc)');
