@@ -10,10 +10,10 @@ Post.extend( Spine.Model.Ajax );
 
 
 jQuery(function($){
-	
-	// controllers go here
-	
-	var Posts = Spine.Controller.sub({
+  
+  // controllers go here
+  
+  var Posts = Spine.Controller.sub({
 
     elements: { // the elements array
       ".posts": "posts",
@@ -44,7 +44,7 @@ jQuery(function($){
   });
   
   return new Posts({el:$("#content")});
-	
+  
 });
 
 
