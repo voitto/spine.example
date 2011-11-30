@@ -20,9 +20,11 @@ require 'lib/Mullet.php';
 // Add your models and controllers here
 
 
+class Post extends Model {}
 
+class Posts extends Controller {}
 
-
+return new Posts;
 
 
 
