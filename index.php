@@ -17,57 +17,11 @@ require 'lib/Mullet.php';
 
 
 
-
-
 // Add your models and controllers here
 
 
 
 
-
-
-
-
-function index() {
-  require 'lib/Mustache.php';
-  $m = new Mustache;
-  session_start();
-  $params = array();
-  if (isset($_SESSION['current_user']))
-    $params['username'] = $_SESSION['current_user'];
-  echo $m->render(file_get_contents('tpl/index.html'),$params);
-}
-
-if (isset($_GET['class'])) {
-  $class = ucwords($_GET['class']);
-  $method = strtolower($_SERVER['REQUEST_METHOD']);
-  if (isset($_GET['method']))
-    $method = $_GET['method'];
-  if (method_exists($class,$method)){
-    $$class = new $class();
-    $$class->$method();
-  }
-} else {
-  index();
-}
-
-
-
-/*
-
-(optional) Routes (requires Moor.php)
-
-require 'lib/Moor.php';
-
-
-if (!in_array(strtolower($_SERVER['REQUEST_METHOD']),array('put','delete')))
-  Moor::route('/@class/@method', '@class(uc)::@method(lc)');
-Moor::route('/@class/:id([0-9A-Za-z_-]+)', '@class(uc)::'.strtolower($_SERVER['REQUEST_METHOD']));
-Moor::route('/@class', '@class(uc)::'.strtolower($_SERVER['REQUEST_METHOD']));
-Moor::route( '*', 'index' );
-Moor::run();
-
-*/
 
 
 
